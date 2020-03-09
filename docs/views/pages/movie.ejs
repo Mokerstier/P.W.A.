@@ -1,0 +1,10 @@
+
+    <%- include('../partials/head.ejs') %>
+<body>
+    <% data.docs.forEach(movie => { %>
+        <a href="detail/<%= movie._id %>">
+        <h3><%= movie.name %></h3>
+    </a>
+    <% }); %>
+</body>
+</html>

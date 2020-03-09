@@ -2,13 +2,14 @@
   "name": "progressive-web-apps-1920",
   "version": "1.0.0",
   "description": "progressive LOTR web app",
-  "main": "index.js",
+  "main": "docs/server.js",
   "directories": {
     "doc": "docs",
     "example": "examples"
   },
   "scripts": {
-    "test": "npm run dev"
+    "test": "npm run dev",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -26,5 +27,16 @@
   "bugs": {
     "url": "https://github.com/Mokerstier/progressive-web-apps-1920/issues"
   },
-  "homepage": "https://github.com/Mokerstier/progressive-web-apps-1920#readme"
+  "homepage": "https://github.com/Mokerstier/progressive-web-apps-1920#readme",
+  "devdependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0",
+    "request": "^2.88.2"
+  }
 }
