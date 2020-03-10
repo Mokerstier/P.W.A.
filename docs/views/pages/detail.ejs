@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-</head>
+<%- include('../partials/head.ejs') %>
 <body>
     <%- include('../partials/header.ejs') %>
     <h3><%= data.name %></h3>
-    <ul>
-        <li><%= data.runtimeInMinutes %></li>
-        <li><%= data.budgetInMillions %></li>
-        <li><%= data.boxOfficeRevenueInMillions %></li>
-        <li><%= data.academyAwardNominations %></li>
-        <li><%= data.academyAwardWins %></li>
-    </ul>
+      <%= !data.race ? include('../partials/moviedetail.ejs') : include('../partials/chardetail.ejs')%>
     
+
+
 </body>
 </html>

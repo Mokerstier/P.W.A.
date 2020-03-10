@@ -12,7 +12,7 @@ app
     .set('view engine', 'ejs')
     .set('views', 'docs/views')
 
-    .use(express.static('public'))
+    .use(express.static(__dirname + '/static'))
 
     .use('/', routes)
 

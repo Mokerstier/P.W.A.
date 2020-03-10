@@ -40,11 +40,11 @@ function getDetail(req, res) {
     const path = req.path
     fetch(`${url}${path}`, config )
     .then(res => res.json())
-    // .then(json => console.log(json))
+    
     .then(json => 
         res.render('pages/detail.ejs', {
         data: json,
-        title: 'Detail'
+        title: `Detail ${json.name}`
         })
     );
 }
@@ -58,6 +58,7 @@ function getData(req, res){
     .then(json => 
         
         res.render(`pages${path}.ejs`, {
+            
         data: json.docs,
         
         title: `List all ${path}`
