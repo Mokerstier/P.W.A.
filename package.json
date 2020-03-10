@@ -1,7 +1,7 @@
 {
   "name": "progressive-web-apps-1920",
   "version": "1.0.0",
-  "description": "progressive LOTR web app",
+  "description": "progressive Dota2 web app",
   "main": "docs/server.js",
   "directories": {
     "doc": "docs",
@@ -21,8 +21,8 @@
   "keywords": [
     "Web",
     "app",
-    "with",
-    "LOTR",
+    "DOTA",
+    "DOTA2",
     "data"
   ],
   "author": "Wouter van der Heijde",

@@ -1,0 +1,14 @@
+<%- include('../partials/head.ejs') %>
+<body>
+    <%- include('../partials/header.ejs') %>
+    <% data.forEach(hero => { %>
+        <article class="hero-card">
+            <a href="">
+            <img src="https://api.opendota.com<%=hero.icon%>" alt="">
+            <div class="hero-card-body">
+                <h3><%= hero.localized_name %></h3>
+            </div>
+            </a>
+        </article>
+    <% }) %>
+</body>
