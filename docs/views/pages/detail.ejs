@@ -7,6 +7,14 @@
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
+    <h3><%= data.name %></h3>
+    <ul>
+        <li><%= data.runtimeInMinutes %></li>
+        <li><%= data.budgetInMillions %></li>
+        <li><%= data.boxOfficeRevenueInMillions %></li>
+        <li><%= data.academyAwardNominations %></li>
+        <li><%= data.academyAwardWins %></li>
+    </ul>
     
 </body>
 </html>

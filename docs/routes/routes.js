@@ -8,10 +8,12 @@ function routes(){
 	const urlencodedParser = bodyParser.urlencoded({ extended: true });
 
     router
-        .get('/', serve.getHome)
-        .get('/movie', serve.getMovie)
-        .get('/character', serve.getChars)
-        .get('/detail/:id', serve.getDetail)
+        .get('/' , serve.getHome)
+        .get('/home' , serve.getHome)
+        .get('/movie', serve.getData)
+        .get('/character', serve.getData)
+        .get('/character/:id', serve.getDetail)
+        .get('/movie/:id', serve.getDetail)
 
     return router
 }

@@ -2,7 +2,7 @@
 <body>
     <%- include('../partials/header.ejs') %>
     <% data.forEach(char => { %>
-        <a href="detail/<%= char._id %>">
+        <a href="/character/<%= char._id %>">
         <h3><%= char.name %></h3>
     </a>
     <% }); %>

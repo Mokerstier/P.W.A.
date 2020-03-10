@@ -1,8 +1,8 @@
 
     <%- include('../partials/head.ejs') %>
 <body>
-    <% data.docs.forEach(movie => { %>
-        <a href="detail/<%= movie._id %>">
+    <% data.forEach(movie => { %>
+        <a href="/movie/<%= movie._id %>">
         <h3><%= movie.name %></h3>
     </a>
     <% }); %>

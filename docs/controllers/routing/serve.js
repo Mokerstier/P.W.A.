@@ -10,6 +10,10 @@ const config = {
 }
 function getHome(req, res){
     const path = req.path
+    console.log(path)
+    // res.render('pages/home.ejs', {
+    //     title: 'Home'
+    // })
     fetch(`${url}${path}`, config )
     .then(res => res.json())
     .then(json => 
@@ -19,25 +23,24 @@ function getHome(req, res){
         })
     );
 }
-function getMovie(req, res) {
-    const path = req.path
-    fetch(`${url}${path}`, config )
-    .then(res => res.json())
-    .then(json => 
-        res.render('pages/movie.ejs', {
-        data: json,
-        title: 'Home'
-        })
-    );
-}
+// function getMovie(req, res) {
+//     const path = req.path
+//     fetch(`${url}${path}`, config )
+//     .then(res => res.json())
+//     .then(json => 
+//         res.render('pages/movie.ejs', {
+//         data: json,
+//         title: 'Home'
+//         })
+//     );
+// }
 
 function getDetail(req, res) {
     const {id} = req.params
     const path = req.path
-    console.log(path)
-    fetch(`${url}${path}/${id}`, config )
+    fetch(`${url}${path}`, config )
     .then(res => res.json())
-    .then(json => console.log(json))
+    // .then(json => console.log(json))
     .then(json => 
         res.render('pages/detail.ejs', {
         data: json,
@@ -46,18 +49,20 @@ function getDetail(req, res) {
     );
 }
 
-function getChars(req, res){
+function getData(req, res){
     const path = req.path
     console.log(`${url}${path}`)
     fetch(`${url}${path}`, config )
     .then(response => response.json())
-    //.then(json => console.log(json.docs))
+    // .then(json => console.log(json.docs))
     .then(json => 
-        res.render('pages/chars.ejs', {
+        
+        res.render(`pages${path}.ejs`, {
         data: json.docs,
-        title: 'List all characters'
+        
+        title: `List all ${path}`
         })
     );
 }
 
-module.exports = {getHome, getMovie, getDetail, getChars}
+module.exports = {getHome, getData, getDetail }
