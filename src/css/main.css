@@ -1,0 +1,9 @@
+body{
+    background-color: rgb(39, 39, 39);
+    background-image: url("../img/profile_bg.jpg");
+    background-size: contain;
+    color: #fff;
+}
+header{
+    background-color: #171a21;
+}

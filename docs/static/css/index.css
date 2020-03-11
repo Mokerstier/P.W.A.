@@ -1,1 +1,1 @@
-ul{list-style:none}a{text-decoration:none}.hero-img{height:7em;width:10em;-o-object-fit:cover;object-fit:cover;-o-object-position:center;object-position:center}
+ul{display:flex;list-style:none}a{color:#fff;text-decoration:none}.hero-img{height:7em;width:10em;-o-object-fit:cover;object-fit:cover;-o-object-position:center;object-position:center}body{background-color:#272727;background-image:url(../img/profile_bg.jpg);background-size:cover;color:#fff}header{background-color:#171a21}
