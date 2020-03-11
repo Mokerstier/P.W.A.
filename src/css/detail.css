@@ -4,3 +4,9 @@ ul{
 a{
     text-decoration: none;
 }
+.hero-img{
+    height: 5em;
+    width: 5em;
+    object-fit: cover;
+    object-position: center;
+}

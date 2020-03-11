@@ -2,13 +2,17 @@
 
 <body>
     <%- include('../partials/header.ejs') %>
-    <% data.forEach(hero => { %>
-    <a href="<%= hero.id %>"></a>
-    <article>
-        <img src="https://api.opendota.com<%=hero.icon%>" alt="Icon of <%= hero.localized_name %>">
-        <h3><%= hero.localized_name %></h3>
-    </article>
-    </a>
+    <ul>
+        <% data.forEach(hero => { %>
+        <li>
+            <a href="<%= hero.id %>">
+                <img class="hero-img" src="https://api.opendota.com<%=hero.img%>"
+                    alt="Img of <%= hero.localized_name %>">
+                <h3><%= hero.localized_name %></h3>
+                <p>Attack type: <%= hero.attack_type %></p>
+            </a>
+        </li>
+        <% }) %>
+    </ul>
 
-    <% }) %>
 </body>

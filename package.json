@@ -13,7 +13,8 @@
     "build:css": "node scripts/build-css.js",
     "watch:css": "chokidar 'src/css/*.css' --command 'npm run build:css'",
     "test": "npm run dev",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "fetch": "node scripts/write-JSON.js"
   },
   "repository": {
     "type": "git",
@@ -38,10 +39,10 @@
     "express": "^4.17.1",
     "node-fetch": "^2.6.0"
   },
-
   "devDependencies": {
     "chokidar-cli": "^2.1.0",
     "dotenv": "^8.2.0",
+    "fs-extra": "^8.1.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-clean-css": "^4.2.0",
