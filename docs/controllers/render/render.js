@@ -7,10 +7,10 @@ function renderHome(req, res) {
     })
 }
 async function renderHeroes(req, res){
-    const data = await dotApi.getHeroes(req.path)
-    console.log(data)
+    const heroesData = await dotApi.getHeroes(req.path)
+    console.log(heroesData)
     res.render('pages/heroes.ejs', {
-        data: data,
+        data: heroesData,
         title: 'Home'
     })
 }
