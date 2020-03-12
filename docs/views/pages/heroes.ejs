@@ -3,7 +3,7 @@
 <body>
     <%- include('../partials/header.ejs') %>
     <ul>
-        <% data.forEach(hero => { %>
+        <% data.map(hero => { %>
         <li>
             <a href="<%= hero.id %>">
                 <img class="hero-img" src="https://api.opendota.com<%=hero.img%>"
