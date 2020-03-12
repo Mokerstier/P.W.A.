@@ -4,10 +4,9 @@ const path = require('path')
 
 require("dotenv").config()
 
-dotApi.getHeroes(`/heroStats`).then(heroesData => {
+dotApi.getData(`/heroStats`).then(heroesData => {
 
     let jsonContent = `{"heroes":${JSON.stringify(heroesData, null, 2)}}`
-    console.log(jsonContent)
     fs.mkdirp(path.join(__dirname, '..', 'data'))
     fs.writeFile(path.join(__dirname, '..', 'data/data.json'), jsonContent, 'utf8', function (err) {
         if (err) {
