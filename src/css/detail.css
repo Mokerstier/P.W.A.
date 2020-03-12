@@ -1,10 +1,13 @@
-a{
-    color: #fff;
-    text-decoration: none;
+a {
+  color: #fff;
+  text-decoration: none;
 }
-.hero-img{
-    height: 7em;
-    width: 10em;
-    object-fit: cover;
-    object-position: center;
+.hero-img {
+  height: 7em;
+  width: 10em;
+  object-fit: cover;
+  object-position: center;
+}
+.hero-card {
+  width: 10em;
 }

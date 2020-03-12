@@ -1,3 +1,4 @@
+
 header{
     align-items: center;
     background-color: #171a21;
@@ -6,10 +7,22 @@ header{
     padding: 0 1rem;
     position: relative;
 }
+header nav{
+    width: var(--container-width);
+    margin: auto;
+}
 header ul{
+    display: flex;
+    align-items: center;
     padding: 0;
 }
 header a{
     color: #b8b6b4;
-
+    padding: 1em;
+    text-transform: capitalize;
+    vertical-align: middle;
+}
+header img{
+    height: 44px;
+    width: auto;
 }
