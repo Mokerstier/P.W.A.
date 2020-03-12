@@ -1,9 +1,0 @@
-<%- include('../partials/head.ejs') %>
-<body>
-    <%- include('../partials/header.ejs') %>
-    <% data.forEach(char => { %>
-        <a href="/character/<%= char._id %>">
-        <h3><%= char.name %></h3>
-    </a>
-    <% }); %>
-</body>
