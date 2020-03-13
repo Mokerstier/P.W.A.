@@ -3,9 +3,9 @@ const bodyParser = require("body-parser");
 
 const { routes } = require("./routes/routes");
 
-require("dotenv").config();
 
-const port = process.env.port || 8000
+
+const port = 8000
 const app = express()
 
 app

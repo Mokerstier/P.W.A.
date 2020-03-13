@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 
-require("dotenv").config()
+
 const URL = 'https://api.opendota.com/api'
 // async function getHeroes(req, res) {
 //     console.log(`trying to fetch from: ${process.env.dotaUrl}${req}`)
