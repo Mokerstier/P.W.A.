@@ -1,0 +1,19 @@
+<%- include('../partials/head.ejs') %>
+
+<body>
+    <%- include('../partials/header.ejs') %>
+
+    
+    <aside>
+
+        <img class="avatar-img" src="<%=data.profile.avatarfull%>" alt="Avatar img of <%= data.profile.personaname %>">
+        <div>
+            <h3><%= data.profile.personaname %></h3>
+            <p>MMR: <%= data.mmr_estimate.estimate %></p>
+            <a href="<%= data.profile.profileurl %>">Steam Profile</a>
+        </div>
+
+    </aside>
+    <%- include('../partials/recentMatches.ejs') %>
+
+</body>

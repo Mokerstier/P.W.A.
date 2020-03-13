@@ -1,0 +1,19 @@
+<%- include('../partials/head.ejs') %>
+
+<body>
+    <%- include('../partials/header.ejs') %>
+    <main>
+        <ul>
+            <% data.map(hero => { %>
+            <li class="hero-card">
+                <a href="<%= hero.id %>">
+                    <img class="hero-img" src="https://api.opendota.com<%=hero.img%>"
+                        alt="Img of <%= hero.localized_name %>">
+                    <h3><%= hero.localized_name %></h3>
+                    <p>Attack type: <%= hero.attack_type %></p>
+                </a>
+            </li>
+            <% }) %>
+        </ul>
+    </main>
+</body>

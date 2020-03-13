@@ -18,4 +18,5 @@ app
 
 app.listen(process.env.port, function() {
     console.log(`Application started on port: ${process.env.port}`);
+    console.log(`open the page -> http://localhost:${process.env.port}`)
 });

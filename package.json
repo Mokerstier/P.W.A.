@@ -1,18 +1,20 @@
 {
   "name": "progressive-web-apps-1920",
   "version": "1.0.0",
-  "description": "progressive LOTR web app",
+  "description": "progressive Dota2 web app",
   "main": "docs/server.js",
   "directories": {
     "doc": "docs",
     "example": "examples"
   },
   "scripts": {
-    "prestart": "npm run build:css",
-    "prebuild:css": "rimraf ./docs/static",
+    "prestart": "npm run fetch & npm run build:css",
+    "prebuild:css": "rimraf ./docs/static/css",
     "build:css": "node scripts/build-css.js",
+    "watch:css": "chokidar 'src/css/*.css' --command 'npm run build:css'",
     "test": "npm run dev",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "fetch": "node scripts/write-JSON.js"
   },
   "repository": {
     "type": "git",
@@ -21,8 +23,8 @@
   "keywords": [
     "Web",
     "app",
-    "with",
-    "LOTR",
+    "DOTA",
+    "DOTA2",
     "data"
   ],
   "author": "Wouter van der Heijde",
@@ -31,19 +33,21 @@
     "url": "https://github.com/Mokerstier/progressive-web-apps-1920/issues"
   },
   "homepage": "https://github.com/Mokerstier/progressive-web-apps-1920#readme",
-  "devDependencies": {
-    "nodemon": "^2.0.2",
-    "dotenv": "^8.2.0",
-    "gulp": "^4.0.2",
-    "gulp-clean-css": "^4.2.0",
-    "gulp-autoprefixer": "^7.0.1",
-    "gulp-concat": "^2.6.1",
-    "rimraf": "^3.0.2"
-  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "chokidar-cli": "^2.1.0",
+    "dotenv": "^8.2.0",
+    "fs-extra": "^8.1.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
+    "nodemon": "^2.0.2",
+    "rimraf": "^3.0.2"
   }
 }
