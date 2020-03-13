@@ -20,25 +20,32 @@ async function renderHeroes(req, res) {
     });
 
 }
-function renderDetail(req, res) {
+async function renderDetail(req, res) {
     // const heroes = getter.getHeroes()
     // console.log(heroes)
+    const id = req.params.id
+    let heroArray
     fs.readFile('data/data.json', (err, data) => {
         if (err)
             throw err;
         const dataHeroes = JSON.parse(data)
         const heroes = dataHeroes.heroes
-        const id = req.params.id
-
-        const thisHero = heroes.filter(hero => hero.id == id)
-        const hero = thisHero[0]
+        
+        heroArray = heroes.filter(hero => hero.id == id)
+        heroArray.map(hero => {
+            heroArray = hero
+            // console.log('hier je array '+ heroArray.localized_name)
+        })
+       
         res.render('pages/detail.ejs',{
-            hero: hero,
-            title: `Detail ${hero.localized_name}`
+            hero: heroArray,
+            title: `Detail ${heroArray.localized_name}`
            
         })
+        
+        
     })
-
+   
 }
 async function renderStats(req, res) {
     const myStats = await dotApi.getData(req.path)

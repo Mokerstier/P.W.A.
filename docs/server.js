@@ -3,8 +3,6 @@ const bodyParser = require("body-parser");
 
 const { routes } = require("./routes/routes");
 
-
-
 const port = 8000
 const app = express()
 

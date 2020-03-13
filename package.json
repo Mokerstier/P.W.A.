@@ -14,7 +14,7 @@
     "watch:css": "chokidar \"src/css/*.css\" -C \"npm run build:css\"",
     "test": "npm run dev",
     "start": "node docs/server.js",
-    "dev": "nodemon server.js",
+    "dev": "nodemon docs/server.js",
     "fetch": "node scripts/write-JSON.js"
   },
   "repository": {
