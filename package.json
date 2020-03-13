@@ -13,7 +13,7 @@
     "build:css": "node scripts/build-css.js",
     "watch:css": "chokidar \"src/css/*.css\" -C \"npm run build:css\"",
     "test": "npm run dev",
-    "start": "node server.js",
+    "start": "node docs/server.js",
     "dev": "nodemon server.js",
     "fetch": "node scripts/write-JSON.js"
   },
