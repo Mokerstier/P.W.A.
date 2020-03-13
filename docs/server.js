@@ -16,7 +16,7 @@ app
 
     .use('/', routes)
 
-app.listen(port, function() {
+app.listen(process.env.PORT || port, function() {
     console.log(`Application started on port: ${port}`);
     console.log(`open the page -> http://localhost:${port}`)
 });
