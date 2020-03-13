@@ -9,7 +9,7 @@
   },
   "scripts": {
     "prestart": "npm run fetch & npm run build:css",
-    "prebuild:css": "rimraf ./docs/static/css",
+    "prebuild:css": "rimraf /docs/static/css",
     "build:css": "node scripts/build-css.js",
     "watch:css": "chokidar \"src/css/*.css\" -C \"npm run build:css\"",
     "test": "npm run dev",
