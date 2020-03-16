@@ -11,3 +11,6 @@ a {
 .hero-card {
   width: 10em;
 }
+.hero-detail ul{
+  display: block;
+}

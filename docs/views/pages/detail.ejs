@@ -1,0 +1,20 @@
+<%- include('../partials/head.ejs') %>
+
+<body>
+    <%- include('../partials/header.ejs') %>
+    <main class="hero-detail">
+        <h3><%= hero.localized_name %></h3>
+        <% hero.roles.forEach(role =>{ %>
+        <span><%= role %></span>
+        <%})%></p>
+        <ul>
+            <li>Primary stat: <%= stat %></li>
+            <li>HP:<%= hero.base_health %></li>
+            <li>MP: <%=hero.base_mana %></li>
+            <li>Movement Speed: <%= hero.move_speed %></li>
+            <li></li>
+        </ul>
+        <p></p>
+        <p></p>
+    </main>
+</body>

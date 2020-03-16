@@ -9,6 +9,7 @@ function routes(){
     router
         .get('/', render.renderHome)
         .get('/heroStats', render.renderHeroes)
+        .get('/:id', render.renderDetail)
         .get('/players/:id', render.renderStats)
         // .get('/:id', render.renderDetail)
     return router

@@ -3,9 +3,7 @@ const bodyParser = require("body-parser");
 
 const { routes } = require("./routes/routes");
 
-require("dotenv").config();
-
-
+const port = 8000
 const app = express()
 
 app
@@ -16,7 +14,7 @@ app
 
     .use('/', routes)
 
-app.listen(process.env.port, function() {
-    console.log(`Application started on port: ${process.env.port}`);
-    console.log(`open the page -> http://localhost:${process.env.port}`)
+app.listen(process.env.PORT || port, function() {
+    console.log(`Application started on port: ${port}`);
+    console.log(`open the page -> http://localhost:${port}`)
 });

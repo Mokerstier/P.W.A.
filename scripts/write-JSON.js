@@ -2,7 +2,6 @@ const fs = require('fs-extra')
 const dotApi = require('../docs/controllers/api/dotApi')
 const path = require('path')
 
-require("dotenv").config()
 
 dotApi.getData(`/heroStats`).then(heroesData => {
 
