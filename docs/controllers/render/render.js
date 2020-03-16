@@ -25,6 +25,7 @@ async function renderDetail(req, res) {
     // console.log(heroes)
     const id = req.params.id
     let heroArray
+    let stat =''
     fs.readFile('data/data.json', (err, data) => {
         if (err)
             throw err;
@@ -34,11 +35,22 @@ async function renderDetail(req, res) {
         heroArray = heroes.filter(hero => hero.id == id)
         heroArray.map(hero => {
             heroArray = hero
-            // console.log('hier je array '+ heroArray.localized_name)
+            switch (heroArray.primary_attr){
+                case 'agi':
+                    stat = 'Agility'
+                    break
+                case 'str':
+                    stat = 'Strength'
+                    break
+                case 'int':
+                    stat = 'Intelligence'
+                    break
+                }
         })
        
         res.render('pages/detail.ejs',{
             hero: heroArray,
+            stat: stat,
             title: `Detail ${heroArray.localized_name}`
            
         })
