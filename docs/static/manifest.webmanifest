@@ -1,0 +1,22 @@
+{
+    "short_name": "Dota2Api",
+    "name": "Check your personal Dota history",
+    "description": "Dota2 progress application",
+    "icons": [
+      {
+        "src": "/img/pngfind.com-dota-2-logo-png-774896.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/img/pngfind.com-dota-2-logo-png-774896.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": "/?source=pwa",
+    "background_color": "rgb(39, 39, 39)",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "rgb(39, 39, 39)"
+  }
