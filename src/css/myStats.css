@@ -1,14 +1,30 @@
-article{
-    background: rgba(0, 0, 0, 0.4);
-    padding: 1rem;
+article {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 1rem;
+  position: relative;
+  margin-bottom: 1rem;
 }
-aside{
-    display: flex;
-    flex-wrap: wrap;
-    width: var(--container-width);
-    margin: 2rem auto;
+article img {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  object-fit: contain;
+  opacity: 0.6;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
-aside img{
-    border-radius: 1em;
-    border: solid 3px rgba(255, 255, 255, 0.4);
+aside {
+  display: flex;
+  flex-wrap: wrap;
+  width: var(--container-width);
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+aside img {
+  border-radius: 1rem;
+  border: solid 3px rgba(255, 255, 255, 0.35);
+}
+aside div {
+  padding-right: 1rem;
 }
