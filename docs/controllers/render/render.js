@@ -25,6 +25,7 @@ async function renderDetail(req, res) {
     // console.log(heroes)
     const id = req.params.id
     let heroArray
+    
     let stat =''
     fs.readFile('data/data.json', (err, data) => {
         if (err)
@@ -63,6 +64,7 @@ async function renderStats(req, res) {
     const myStats = await dotApi.getData(req.path)
     const recentMatchesData = await dotApi.getData(req.path + recentMatches)
     const heroNames = []
+    const heroImgArray = []
     fs.readFile('data/data.json', (err, data) => {
         if (err)
             throw err;
@@ -73,10 +75,12 @@ async function renderStats(req, res) {
             const matchHero = heroes.filter(hero => match.hero_id === hero.id)
             matchHero.map(hero => {
                 heroNames.push(hero.localized_name)
+                heroImgArray.push(hero.img)
             })
         })
         res.render('pages/myStats.ejs', {
             matches: recentMatchesData,
+            heroImgArray: heroImgArray,
             heroName: heroNames,
             data: myStats,
             title: 'My stats'

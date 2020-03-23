@@ -1,11 +1,17 @@
 <main>
     <% for(let i=0; i < matches.length; i++) {%>
         <article>
-            <p> Match duration: <%= Math.floor(matches[i].duration / 60) %>min.</p>   
-            <p>Played with: <%= heroName[i] %></p>
-            <p class="hero-kills">Kills: <%= matches[i].kills%></p>
-            <p class="hero-deaths">Deaths: <%= matches[i].deaths%></p>
-            <p class="hero-assists">Assists: <%= matches[i].assists%></p>
+            <img src="https://api.opendota.com<%= heroImgArray[i]%>" alt="Hero portrait this match played">
+            <div>
+                <p><%= new Date(matches[i].start_time * 1000).toISOString().slice(0, 19).replace('T', ' ') %></p>
+                <p>Match duration: <%= Math.floor(matches[i].duration / 60) %>min.</p>
+            </div>
+            <ul>
+                <li>Played with: <%= heroName[i] %></li>
+                <li class="hero-kills">Kills: <%= matches[i].kills%></li>
+                <li class="hero-deaths">Deaths: <%= matches[i].deaths%></li>
+                <li class="hero-assists">Assists: <%= matches[i].assists%></li>
+            </ul>
         </article>
     <%}%>
 </main>

@@ -2,7 +2,7 @@
 
 <body>
     <%- include('../partials/header.ejs') %>
-    <main class="hero-detail">
+     <main class="hero-detail">
         <h3><%= hero.localized_name %></h3>
         <% hero.roles.forEach(role =>{ %>
         <span><%= role %></span>
@@ -16,6 +16,6 @@
         </ul>
         <p></p>
         <p></p>
-    </main>
+    </main> 
 
     <%- include('../partials/pageend.ejs') %>
