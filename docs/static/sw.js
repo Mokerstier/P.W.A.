@@ -23,30 +23,32 @@ self.addEventListener('install', (e) => {
   )
 });
 
-self.addEventListener("fetch", (event) => {
+self.addEventListener("fetch", event => {
 
   const req = event.request
-  
-  if (isCoreGetRequest(event.request)) {
+  if (isCoreGetRequest(req)) {
     console.log("Core get request: ", req.url);
     // cache only strategy
     event.respondWith(
       caches
         .open(CORE_CACHE_NAME)
-        .then(cache => cache.match(req.url))
+        .then(cache => cache.match(event.request.url))
     );
   } else if (isHtmlGetRequest(event.request)) {
-    console.log("html get request", req.url);
+    console.log("html get request", event.request.url);
     // generic fallback
+    console.log(req)
     event.respondWith(
+      
       caches
         .open("html-cache")
-        .then(cache => cache.match(req.url))
-        .then(response =>
-          response.headers.match ? response : fetchAndCache(event.request, "html-cache")
-        )
+        .then(cache => cache.match(event.request.url))
+        // .then(response =>
+        //   response.headers.match ? response : fetchAndCache(event.request, "html-cache")
+        // )
         .catch(event => {
-          
+          console.log(event)
+          debugger
           return caches
             .open(CORE_CACHE_NAME)
             .then(cache => cache.match('/img/dota-2-offline.png'));
@@ -54,23 +56,27 @@ self.addEventListener("fetch", (event) => {
     );
   }
 });
-  // e.respondWith(
-  //   caches.match(req.url).then(cachedRes => {
-  //     // console.log("html get request", req.url);
-  //       return cachedRes || fetch(req).then((response) =>{
-  //         console.log(req)
-  //         const responseClone = response.clone();
-  //       caches
-  //       .open(CORE_CACHE_NAME)
-  //       .then((cache) => {
-  //         cache.put(req, responseClone);
-  //       })
-  //       return response
-  //     })
-  //   }).catch(()=>{
-  //     return caches.match('/img/dota-2-offline.png')
-  //   })
-  // )
+
+//   e.respondWith(
+//     caches.match(req.url).then(cachedRes => {
+//       // console.log("html get request", req.url);
+//          if (cachedRes){
+//          response.headers.match ? response : fetchAndCache(event.request, "html-cache")
+//}
+//         return cachedRes || fetch(req).then((response) =>{
+//           console.log(req)
+//           const responseClone = response.clone();
+//         caches
+//         .open(CORE_CACHE_NAME)
+//         .then((cache) => {
+//           cache.put(req, responseClone);
+//         })
+//         return response
+//       })
+//     }).catch(()=>{
+//       return caches.match('/img/dota-2-offline.png')
+//     })
+//   )
 // })
 
 // self.addEventListener("activate", event => {
@@ -166,9 +172,9 @@ function getPathName(requestUrl) {
  */
 function isHtmlGetRequest(request) {
   return (
-      request.method === "GET" &&
-      request.headers.get("accept") !== null &&
-      request.headers.get("accept").indexOf("text/html") > -1
+    request.method === "GET" &&
+    request.headers.get("accept") !== null &&
+    request.headers.get("accept").indexOf("text/html") > -1
   );
 }
 /**
@@ -179,6 +185,6 @@ function isHtmlGetRequest(request) {
  */
 function isCoreGetRequest(request) {
   return (
-      request.method === "GET" && CORE_ASSETS.includes(getPathName(request.url))
+    request.method === "GET" && CORE_ASSETS.includes(getPathName(request.url))
   );
 }
