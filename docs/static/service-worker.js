@@ -1,4 +1,4 @@
-const CORE_CACHE_VERSION = "v6";
+const CORE_CACHE_VERSION = "v2";
 const CORE_ASSETS = [
   '/css/index.css',
   '/offline.html',
@@ -40,6 +40,7 @@ self.addEventListener("fetch", event => {
         .open(CORE_CACHE_VERSION)
         .then(cache => cache.match(event.request.url))
     );
+ 
   } else if (isHtmlGetRequest(event.request)) {
     
     console.log("html get request", event.request.url);
@@ -62,15 +63,27 @@ self.addEventListener("fetch", event => {
 
 function fetchAndCache(request, cacheName) {
   return fetch(request).then(response => {
+    console.log(request.url)
     if (!response.ok) {
       throw new TypeError("Bad response status");
     }
 
     const clone = response.clone();
-    caches.open(cacheName).then(cache => cache.put(request, clone));
+    caches
+      .open(cacheName)
+      .then(cache => cache.put(request, clone));
     return response;
   });
 }
+// function isImgGetRequest(request) {
+//   console.log(request.method)
+//   console.log(request.destination);
+  
+//   return (
+//     request.method === "GET" &&
+//     request.destination === "image"
+//   );
+// }
 
 /**
  * Checks if a request is a GET and HTML request

@@ -10,5 +10,13 @@ a{
     object-position: center;
 }
 .hero-card{
+    background-color: rgba(35, 30, 92, 0.582);
     width: 10em;    
+}
+.hero-card:hover .hero-img{
+    animation: hover-dance 4s infinite;
+}
+@keyframes hover-dance {
+    from { transform: rotate(0deg) translateX(-5px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(5px) rotate(-360deg); }
 }
