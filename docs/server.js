@@ -5,7 +5,8 @@ const bodyParser = require("body-parser")
 const urlencodedParser = bodyParser.urlencoded({ extended: true })
 const cookieParser = require("cookie-parser")
 const passport = require("passport")
-
+const compression = require('compression')
+require('dotenv').config()
 
 const { routes } = require("./routes/routes");
 
@@ -26,15 +27,18 @@ app
     .set('view engine', 'ejs')
     .set('views', 'docs/views')
     
+    .use(compression())
+    .use(express.static(__dirname + '/static'))
 
     .use((req, res, next) => {
         res.header('Cache-Control', 'max-age=2592000000');
         next()
     })
-
-    .use(express.static(__dirname + '/static'))
     
     .use('/', routes)
+    .use(function (req, res, next) {
+        res.status(404).send("Sorry can't find that!")
+      })
 
 app.listen(process.env.PORT || port, () => {
     console.log(`Application started on port: ${port}`);

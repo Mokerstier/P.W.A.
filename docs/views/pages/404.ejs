@@ -1,0 +1,13 @@
+<%- include('../partials/head.ejs') %>
+<body>
+    <main>
+        <h1>The requested page doesn't appear to be there!?</h1>
+        <p>Try something else?</p>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/heroStats">All heroes</a></li>
+            <li><a href="/<%= randomHero %>">Show me a random hero plz</a></li>
+        </ul>
+    </main>
+</body>
+<%- include('../partials/pageend.ejs') %>

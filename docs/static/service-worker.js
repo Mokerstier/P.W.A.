@@ -1,8 +1,10 @@
-const CORE_CACHE_VERSION = "v2";
+const CORE_CACHE_VERSION = "v4";
 const CORE_ASSETS = [
   '/css/index.css',
   '/offline.html',
   '/img/dota-2-logo-192.png',
+  '/img/dota-2-offline.png',
+  '/404.html'
 ];
 
 self.addEventListener("install", event => {
@@ -31,7 +33,7 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener("fetch", event => {
-  //console.log("Fetch event: ", event.request.url);
+  console.log("Fetch event: ", event.request.url);
   if (isCoreGetRequest(event.request)) {
     //console.log("Core get request: ", event.request.url);
     // cache only strategy
@@ -49,26 +51,50 @@ self.addEventListener("fetch", event => {
       caches
         .open("html-cache")
         .then(cache => cache.match(event.request.url))
+        .then(response => console.log(response)
+        )
         .then(response =>
           response ? response : fetchAndCache(event.request, "html-cache")
         )
         .catch(e => {
+          console.log(e)
           return caches
             .open(CORE_CACHE_VERSION)
-            .then(cache => cache.match('/offline.html'));
+            .then(cache => cache.match('/img/dota-2-offline.png'));
         })
     );
+  } else if(isImgGetRequest(event.request)) {
+    event.respondWith(
+    caches.match(event.request.url).then(cachedRes => {
+      // console.log("html get request", req.url);
+        return cachedRes || fetch(event.request).then((response) =>{
+          console.log("this is the img Fetch response: ",response)
+        const responseClone = response.clone();
+        caches
+        .open("dump-cache")
+        .then((cache) => {
+          cache.put(event.request, responseClone);
+        })
+        return response
+      })
+    }).catch(()=>{
+      console.log(response.ok)
+      debugger
+      return caches.match('/img/dota-2-offline.png')
+    })
+  )
   }
 });
 
 function fetchAndCache(request, cacheName) {
   return fetch(request).then(response => {
-    console.log(request.url)
+    console.log(response)
     if (!response.ok) {
       throw new TypeError("Bad response status");
     }
 
     const clone = response.clone();
+    console.log("clone "+clone)
     caches
       .open(cacheName)
       .then(cache => cache.put(request, clone));
@@ -84,7 +110,13 @@ function fetchAndCache(request, cacheName) {
 //     request.destination === "image"
 //   );
 // }
-
+function isImgGetRequest(request){
+  console.log(request)
+  return( 
+    request.method === "GET" &&
+    request.destination === "image"
+  )
+}
 /**
  * Checks if a request is a GET and HTML request
  *
