@@ -43,12 +43,12 @@ return gulp.src([
 ##### Loading time AFTER using Build-CSS script
 ![Clean CSS](https://github.com/Mokerstier/progressive-web-apps-1920/blob/inlog/repo-img/clean-css.png)
 
-A total of 14ms are won because of the minifier. Note: my application isnt really big and i dont have allot CSS. But imagine waht this method could do if you are running a greater application. WOW!
+A total of 14ms are won because of the minifier. Note: my application isn't really big and I dont have allot CSS. But imagine what this method could do if you are running a greater application. WOW!
 
 #### Minify JS
 I have little to zero server-side javascript so the results of compression are minimal so the results of these compression are not shown.
 
-For compression of the js i used the same approach as the CSS build:
+For compression of the js I used the same approach as the CSS build:
 ```
 return gulp.src([
         './src/js/*.js'
