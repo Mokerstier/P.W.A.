@@ -14,12 +14,12 @@ const app = express()
 
 
 app
+    .use(compression())
     .enable('etag')
     .set('etag', 'strong')
     .set('view engine', 'ejs')
     .set('views', 'docs/views')
-    
-    .use(compression())
+
     .use(express.static(__dirname + '/static'))
 
     .use((req, res, next) => {
