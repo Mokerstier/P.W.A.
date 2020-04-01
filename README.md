@@ -134,6 +134,7 @@ function fetchAndCache(request, cacheName) {
   });
 }
 ```
+The same was done for the images:
 
 Because the application makes use of images form another source which I dont controll and they significantly increase the loading time of the page, I decided to cache all the images with the service worker.
 
@@ -161,6 +162,10 @@ else if(isImgGetRequest(event.request)) {
   )
   }
 ```
+### Conclusion
+Results are amazing with all strategys mentiod above combined the loading times and thereby the waiting times are reduced with approximatly a full second for TTI (time to interactive) and about half a second for the FMP (first meaningfull paint) as seen below:
+![Results](https://github.com/Mokerstier/progressive-web-apps-1920/blob/inlog/repo-img/results.png)
+
 <!-- Add a link to your live demo in Github Pages 🌐-->
 
 <!-- ☝️ replace this description with a description of your own work -->
