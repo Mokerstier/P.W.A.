@@ -89,6 +89,11 @@ async function renderStats(req, res) {
     })
 
 }
+function render404(req, res, next){
+    res.render('pages/404.ejs',{
+        title: '404',
+        randomHero: Math.floor(Math.random() * 130)
+    })
+}
 
-
-module.exports = { renderDetail, renderHome, renderHeroes, renderStats }
+module.exports = { renderDetail, renderHome, renderHeroes, renderStats, render404 }

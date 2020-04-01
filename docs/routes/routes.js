@@ -11,6 +11,7 @@ function routes(){
         .get('/heroStats', render.renderHeroes)
         .get('/:id', render.renderDetail)
         .get('/players/:id', render.renderStats)
+        .get('/*', render.render404)
         // .get('/:id', render.renderDetail)
     return router
 }

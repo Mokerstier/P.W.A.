@@ -1,9 +1,13 @@
 
+:root{
+    --skewpos : 20deg;
+    --skewneg : -20deg;
+}
 header{
     align-items: center;
-    background-color: #171a21;
+    background-color: #1a1a1a;
     display: flex;
-    height: 104px;
+    /* height: 104px; */
     padding: 0 1rem;
     position: relative;
 }
@@ -16,13 +20,77 @@ header ul{
     align-items: center;
     padding: 0;
 }
+header li{
+    background-color: rgb(48, 47, 47);
+    transform: skewX(20deg);
+    border-left: 1px solid #fff;
+    padding-left: 15px;
+}
+header li:first-of-type{
+    border: none;
+}
+.skew-container {
+    margin-left: 15px;
+    padding-right: 30px;
+    background-color: rgb(48, 47, 47);
+    transform: skewX(-40deg);
+}
 header a{
+    
+    display: block;
+    transform: skewX(25deg);
     color: #b8b6b4;
     padding: 1em;
     text-transform: capitalize;
-    vertical-align: middle;
+    /* vertical-align: middle; */
+}
+header li:hover a,li:hover .skew-container{
+    color: #fff;
+    background-color: gray;
+}
+header li:first-of-type a{
+    margin-left: 15px;
+    padding-right: 30px;
 }
 header img{
+    opacity: .9;
     height: 44px;
     width: auto;
+}
+header .img{
+    position: relative;
+}
+.smoke, .smoke:after{
+    transform: skewX(25deg);
+    height:100px; 
+    position:absolute;
+    left:50%;
+    margin-left:-40px;
+    z-index: 0;
+}
+.smoke{
+    width:70px;
+    background: radial-gradient(ellipse at 75% 59%, rgba(255,255,255,0.2), transparent 25%), radial-gradient(ellipse at 25% 70%, rgba(255,255,255,0.2), transparent 15%), radial-gradient(ellipse at 35% 61%, rgba(255,255,255,0.2), transparent 10%), radial-gradient(ellipse at 55% 35%, rgba(255,255,255,0.2), transparent 15%);
+    animation:bk 5s infinite ;
+}
+.smoke:after{
+    content: "";
+    background: radial-gradient(ellipse at 75% 59%,  rgba(255,255,255,0.2), transparent 25%), radial-gradient(ellipse at 25% 70%, rgba(255,255,255,0.2), transparent 15%), radial-gradient(ellipse at 35% 61%, rgba(255,255,255,0.2), transparent 10%);
+    animation:bk 2s 1s infinite;
+    width: 100px;
+}
+@keyframes bk {
+    0%{ background-position:ellipse at 0 0, ; opacity:0; background:radial-gradient(ellipse at 25% 70%, rgba(252, 109, 13, 0.685), transparent 10% ); }
+    15%, 85% { opacity:1;}
+    100%{ background-position:-20px -25px,-5px -25px,0px -25px,0px -25px; opacity:0;}
+  }
+
+header canvas {
+    display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+    transform: translate(-50%, -50%) skewX(25deg);
+    background-color: rgba(255, 255, 255, 0);
+
 }
