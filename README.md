@@ -167,6 +167,6 @@ Results are amazing with all strategys mentioned above combined, the loading tim
 
 ![Results](https://github.com/Mokerstier/progressive-web-apps-1920/blob/inlog/repo-img/results.png)
 
-![performance](https://github.com/Mokerstier/progressive-web-apps-1920/blob/inlog/repo-img/performance.png)
+![performance](https://github.com/Mokerstier/progressive-web-apps-1920/blob/inlog/repo-img/Conclusion.png)
 
 
