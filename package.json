@@ -38,7 +38,6 @@
   },
   "homepage": "https://github.com/Mokerstier/progressive-web-apps-1920#readme",
   "dependencies": {
-    "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
@@ -52,17 +51,16 @@
     "mongoose": "^5.9.5",
     "mongoose-unique-validator": "^2.0.3",
     "node-fetch": "^2.6.0",
-    "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
-  },
-  "devDependencies": {
-    "chokidar-cli": "^2.1.0",
     "dotenv": "^8.2.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-clean-css": "^4.2.0",
     "gulp-concat": "^2.6.1",
-    "nodemon": "^2.0.2",
+
     "rimraf": "^3.0.2"
+  },
+  "devDependencies": {
+    "chokidar-cli": "^2.1.0",
+    "nodemon": "^2.0.2"
   }
 }
