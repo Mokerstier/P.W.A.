@@ -45,6 +45,21 @@ return gulp.src([
 
 A total of 14ms are won because of the minifier. Note: my application isnt really big and i dont have allot CSS. But imagine waht this method could do if you are running a greater application. WOW!
 
+#### Minify JS
+I have little to zero server-side javascript so the results of compression are minimal so the results of these compression are not shown.
+
+For compression of the js i used the same approach as the CSS build:
+```
+return gulp.src([
+        './src/js/*.js'
+    ])
+    
+    .pipe(concat('bundle.min.js'))
+    
+    .pipe(uglify({ mangle: false }))
+    .pipe(gulp.dest('./docs/static/js'))
+```
+
 #### Express Compression 
 By using this middleware function with express, files are compressed with gzip. With this method all headers sent by the server to the client. By default a compression is used that compromises between speed and compression (zlib.Z_DEFAULT_COMPRESSION points). [Source](https://expressjs.com/en/resources/middleware/compression.html)
 
@@ -55,7 +70,97 @@ How to implement:
 ```
 app.use(compression())
 ```
+#### Service worker
+With compression and the buildsteps mentioned above all is done to reduce file size and loading time. Nevertheless there is still a giant wait time on the TTFB (time to first byte). This problem can be easily tackled with a cahcing strategy!
 
+Therfore I used a service worker that serves all my static files from the cache.
+
+On first visit the service worker tells the browser to cache my critical files:
+```
+const CORE_ASSETS = [
+  '/css/index.css',
+  '/offline.html',
+  '/img/dota-2-logo-192.png',
+  '/img/dota-2-offline.png',
+  '/404.html'
+];
+```
+This way the browser doesnt have to make a request to the server when fetching the CSS, offline page and error page, reducing the TTFB significantly.
+
+![Cache strat](https://github.com/Mokerstier/progressive-web-apps-1920/blob/inlog/repo-img/Cache-TTFB.png)
+
+The service worker also caches all visited pages making them availeble even when the user is offline.
+
+Approach:
+```
+} else if (isHtmlGetRequest(event.request)) {
+    
+    console.log("html get request", event.request.url);
+    // generic fallback
+    event.respondWith(
+      caches
+        .open("html-cache")
+        .then(cache => cache.match(event.request.url))
+        .then(response => console.log(response)
+        )
+        .then(response =>
+          response ? response : fetchAndCache(event.request, "html-cache")
+        )
+        .catch(e => {
+          console.log(e)
+          return caches
+            .open(CORE_CACHE_VERSION)
+            .then(cache => cache.match('/img/dota-2-offline.png'));
+        })
+    );
+```
+This apporach checks if a HTML request was made and if so it fetches the request from the server and stores it in HTML-cache with `fetchAndCache(event.request, "html-cache")`
+
+The fetch and cache function
+```
+function fetchAndCache(request, cacheName) {
+  return fetch(request).then(response => {
+    console.log(response)
+    if (!response.ok) {
+      throw new TypeError("Bad response status");
+    }
+
+    const clone = response.clone();
+    console.log("clone "+clone)
+    caches
+      .open(cacheName)
+      .then(cache => cache.put(request, clone));
+    return response;
+  });
+}
+```
+
+Because the application makes use of images form another source which I dont controll and they significantly increase the loading time of the page, I decided to cache all the images with the service worker.
+
+Approach:
+```
+else if(isImgGetRequest(event.request)) {
+    event.respondWith(
+    caches.match(event.request.url).then(cachedRes => {
+      // console.log("html get request", req.url);
+        return cachedRes || fetch(event.request).then((response) =>{
+          console.log("this is the img Fetch response: ",response)
+        const responseClone = response.clone();
+        caches
+        .open("dump-cache")
+        .then((cache) => {
+          cache.put(event.request, responseClone);
+        })
+        return response
+      })
+    }).catch(()=>{
+      console.log(response.ok)
+      debugger
+      return caches.match('/img/dota-2-offline.png')
+    })
+  )
+  }
+```
 <!-- Add a link to your live demo in Github Pages 🌐-->
 
 <!-- ☝️ replace this description with a description of your own work -->
