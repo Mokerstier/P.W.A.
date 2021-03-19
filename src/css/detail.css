@@ -1,5 +1,5 @@
 a {
-  color: #fff;
+  color: yellow;
   text-decoration: none;
 }
 .hero-detail {
@@ -26,6 +26,7 @@ a {
 }
 .hero-card {
   background-color: rgba(35, 30, 92, 0.582);
+  padding: 0.25rem;
   width: 10em;
   margin-bottom: 1.5rem;
 }
