@@ -5,17 +5,18 @@ const bodyParser = require("body-parser");
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 
 router.post("/", urlencodedParser, async (req, res) => {
+	const { body } = req;
 	// Check if this user already exisits
-	let user = await userSchema.findOne({ email: req.body.email });
+	let user = await userSchema.findOne({ email: body.email });
 	if (user) {
 		return res.status(400).send("That user already exisits!");
 	} else {
 		// Insert the new user if they do not exist yet
 		user = new userSchema({
-			firstName: req.body.firstName,
-			lastName: req.body.lastName,
-			email: req.body.email,
-			password: req.body.password,
+			firstName: body.firstName,
+			lastName: body.lastName,
+			email: body.email,
+			password: body.password,
 
 		});
 
