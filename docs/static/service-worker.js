@@ -1,4 +1,4 @@
-const CORE_CACHE_VERSION = "v5";
+const CORE_CACHE_VERSION = "v5.1";
 const CORE_ASSETS = [
   '/css/index-ac53320c90.css',
 
