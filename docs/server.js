@@ -28,7 +28,7 @@ app
     })
     
     .use('/', routes)
-    .use(function (req, res, next) {
+    .use(function (req, res) {
         res.status(404).send("Sorry can't find that!")
       })
 

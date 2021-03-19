@@ -1,15 +1,16 @@
-const CORE_CACHE_VERSION = "v4";
+const CORE_CACHE_VERSION = "v5";
 const CORE_ASSETS = [
-  '/css/index.css',
-  '/offline.html',
+  '/css/index-ac53320c90.css',
+
   '/img/dota-2-logo-192.png',
   '/img/dota-2-offline.png',
+
+  '/offline.html',
   '/404.html'
 ];
 
 self.addEventListener("install", event => {
   console.log("Installing service worker");
-
   event.waitUntil(
     caches.open(CORE_CACHE_VERSION).then(function(cache) {
       return cache.addAll(CORE_ASSETS).then(() => self.skipWaiting());
@@ -33,7 +34,6 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener("fetch", event => {
-  console.log("Fetch event: ", event.request.url);
   if (isCoreGetRequest(event.request)) {
     //console.log("Core get request: ", event.request.url);
     // cache only strategy
@@ -44,15 +44,12 @@ self.addEventListener("fetch", event => {
     );
  
   } else if (isHtmlGetRequest(event.request)) {
-    
-    console.log("html get request", event.request.url);
     // generic fallback
     event.respondWith(
       caches
         .open("html-cache")
         .then(cache => cache.match(event.request.url))
-        .then(response => console.log(response)
-        )
+        
         .then(response =>
           response ? response : fetchAndCache(event.request, "html-cache")
         )
@@ -66,9 +63,7 @@ self.addEventListener("fetch", event => {
   } else if(isImgGetRequest(event.request)) {
     event.respondWith(
     caches.match(event.request.url).then(cachedRes => {
-      // console.log("html get request", req.url);
         return cachedRes || fetch(event.request).then((response) =>{
-          console.log("this is the img Fetch response: ",response)
         const responseClone = response.clone();
         caches
         .open("dump-cache")
@@ -78,8 +73,6 @@ self.addEventListener("fetch", event => {
         return response
       })
     }).catch(()=>{
-      console.log(response.ok)
-      debugger
       return caches.match('/img/dota-2-offline.png')
     })
   )
@@ -88,30 +81,19 @@ self.addEventListener("fetch", event => {
 
 function fetchAndCache(request, cacheName) {
   return fetch(request).then(response => {
-    console.log(response)
     if (!response.ok) {
       throw new TypeError("Bad response status");
     }
 
     const clone = response.clone();
-    console.log("clone "+clone)
     caches
       .open(cacheName)
       .then(cache => cache.put(request, clone));
     return response;
   });
 }
-// function isImgGetRequest(request) {
-//   console.log(request.method)
-//   console.log(request.destination);
-  
-//   return (
-//     request.method === "GET" &&
-//     request.destination === "image"
-//   );
-// }
+
 function isImgGetRequest(request){
-  console.log(request)
   return( 
     request.method === "GET" &&
     request.destination === "image"
@@ -146,7 +128,7 @@ function isCoreGetRequest(request) {
 /**
  * Get a pathname from a full URL by stripping off domain
  *
- * @param {Object} requestUrl        The request object, e.g. https://www.mydomain.com/index.css
+ * @param {Object} requestUrl        The request object, e.g. https://www.mydomain.com/index-ac53320c90.css
  * @returns {String}                Relative url to the domain, e.g. index.css
  */
 function getPathName(requestUrl) {
