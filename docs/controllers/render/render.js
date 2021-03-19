@@ -1,7 +1,8 @@
 const dotApi = require('../api/dotApi')
 const fs = require('fs-extra')
 const getter = require('../getStored/getter')
-const recentMatches = '/recentMatches'
+const { realpathSync } = require('fs-extra')
+const recent = '/recentMatches'
 
 function renderHome(req, res) {
     res.render('pages/home.ejs', {
@@ -61,8 +62,14 @@ async function renderDetail(req, res) {
    
 }
 async function renderStats(req, res) {
+    const allData = await dotApi.getData(req.path)
+    
     const myStats = await dotApi.getData(req.path)
-    const recentMatchesData = await dotApi.getData(req.path + recentMatches)
+    const recentMatches = await dotApi.getData(req.path + recent)
+    const matchesIDs = await recentMatches.map(({match_id}) => dotApi.getData(`/matches/${match_id}`)) 
+    Promise.all(matchesIDs).then((values) => {
+        console.log(values);
+      });
     const heroNames = []
     const heroImgArray = []
     fs.readFile('data/data.json', (err, data) => {
@@ -71,17 +78,18 @@ async function renderStats(req, res) {
         const dataHeroes = JSON.parse(data);
         const heroes = dataHeroes.heroes
 
-        recentMatchesData.map(match => {
+        recentMatches.map(match => {
             const matchHero = heroes.filter(hero => match.hero_id === hero.id)
-            matchHero.map(hero => {
+            matchHero.map((hero) => {
                 heroNames.push(hero.localized_name)
                 heroImgArray.push(hero.img)
             })
         })
         res.render('pages/myStats.ejs', {
-            matches: recentMatchesData,
+            matches: recentMatches,
             heroImgArray: heroImgArray,
             heroName: heroNames,
+            replays: matchesIDs,
             data: myStats,
             title: 'My stats'
         });

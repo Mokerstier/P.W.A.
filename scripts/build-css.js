@@ -11,4 +11,4 @@ return gulp.src([
     .pipe(autoprefixer({
       cascade: false
     }))
-    .pipe(gulp.dest("./docs/static/css"))
+    .pipe(gulp.dest("./docs/static/css"));
