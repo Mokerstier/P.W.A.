@@ -53,9 +53,7 @@ For compression of the js I used the same approach as the CSS build:
 return gulp.src([
         './src/js/*.js'
     ])
-    
     .pipe(concat('bundle.min.js'))
-    
     .pipe(uglify({ mangle: false }))
     .pipe(gulp.dest('./docs/static/js'))
 ```
@@ -107,7 +105,6 @@ Approach:
           response ? response : fetchAndCache(event.request, "html-cache")
         )
         .catch(e => {
-          console.log(e)
           return caches
             .open(CORE_CACHE_VERSION)
             .then(cache => cache.match('/img/dota-2-offline.png'));
@@ -120,13 +117,10 @@ The fetch and cache function
 ```
 function fetchAndCache(request, cacheName) {
   return fetch(request).then(response => {
-    console.log(response)
     if (!response.ok) {
       throw new TypeError("Bad response status");
     }
-
     const clone = response.clone();
-    console.log("clone "+clone)
     caches
       .open(cacheName)
       .then(cache => cache.put(request, clone));
@@ -143,20 +137,16 @@ Approach:
 else if(isImgGetRequest(event.request)) {
     event.respondWith(
     caches.match(event.request.url).then(cachedRes => {
-      // console.log("html get request", req.url);
-        return cachedRes || fetch(event.request).then((response) =>{
-          console.log("this is the img Fetch response: ",response)
-        const responseClone = response.clone();
-        caches
+        return cachedRes || fetch(event.request).then((response) => {
+           const responseClone = response.clone();
+           caches
         .open("dump-cache")
         .then((cache) => {
-          cache.put(event.request, responseClone);
+           cache.put(event.request, responseClone);
         })
         return response
       })
     }).catch(()=>{
-      console.log(response.ok)
-      debugger
       return caches.match('/img/dota-2-offline.png')
     })
   )
